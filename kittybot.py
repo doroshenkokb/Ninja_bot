@@ -18,6 +18,7 @@ logging.basicConfig(
 
 URL = 'https://api.thecatapi.com/v1/images/search'
 
+
 def get_new_image():
     try:
         response = requests.get(URL)
@@ -30,9 +31,11 @@ def get_new_image():
     random_cat = response[0].get('url')
     return random_cat 
 
+
 def new_cat(update, context):
     chat = update.effective_chat
     context.bot.send_photo(chat.id, get_new_image())
+
 
 def wake_up(update, context):
     chat = update.effective_chat
@@ -53,6 +56,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('newcat', new_cat))
     updater.start_polling()
     updater.idle()
+
 
 if __name__ == '__main__':
     main()
